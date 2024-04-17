@@ -17,6 +17,8 @@ with st.form(key = "chat"):
     prompt = st.text_input("Tell us what kind of bedtime story you want and we'll handle the rest!") # TODO!
     submitted = st.form_submit_button("Submit")
     
+    #this is a comment
+    
     if submitted:
         #Generate story, title, and prompt for image
         story=story_text_generation.get_completion(prompt)
@@ -41,5 +43,3 @@ with st.form(key = "chat"):
         audio_file = open(speech_file_path, 'rb')
         audio_bytes = audio_file.read()
         st.audio(audio_bytes, format='audio/mp3')
-        
-        
