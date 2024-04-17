@@ -8,13 +8,10 @@ import story_text_generation as story_text_generation
 import story_image_generation as story_image_generation
 import story_voice_generation as story_voice_generation
 
-#API Key goes here
-client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
-
 # create our streamlit app
 with st.form(key = "chat"):
     #Ask user for prompt and press submit button
-    prompt = st.text_input("Tell us what kind of bedtime story you want and we'll handle the rest!") # TODO!
+    prompt = st.text_input("Tell us what you want a bedtime story about and we'll handle the rest!") # TODO!
     submitted = st.form_submit_button("Submit")
     
     #this is a comment
@@ -22,8 +19,8 @@ with st.form(key = "chat"):
     if submitted:
         #Generate story, title, and prompt for image
         story=story_text_generation.get_completion(prompt)
-        title_prompt = "The following is a bedtime story for a young child. Generate a title for the story that is 3 words or less. Write only the three word title and nothing else:\n" + story
-        image_prompt= "The following is a bedtime story for a young child. Generate a picture without any text inside that goes with the story:\n" + story
+        title_prompt = "The following is a bedtime story for a young child. Generate a title for this story that is exactly 3 words long. Write only this three word title and nothing else. Do not add any punctuation:\n" + story
+        image_prompt= "The following is a bedtime story for a young child. Generate a picture that depicts the story. Do not put any written language in the picture:\n" + story
         title = story_text_generation.get_completion(title_prompt)
         
         #Write out title and story into app
