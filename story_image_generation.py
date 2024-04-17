@@ -25,17 +25,18 @@ def filename_from_input(prompt):
 
 # Create an image
 # If model is not specified, the default is DALL-E-2.
-def get_image(prompt, image_prompt, model="dall-e-3"):
+def get_image(title, image_prompt, model="dall-e-3"):
   n = 1   # Number of images to generate
   image = client.images.generate(
       prompt=image_prompt,
       model=model,
       n=n,
-      size="1024x1024"
+      size="1024x1024",
+      quality="hd"
     )
 
   for i in range(n):
-      filename = filename_from_input(prompt) + "_" + str(i+1) + ".png"
+      filename = filename_from_input(title) + "_" + str(i+1) + ".png"
       download_image(filename, image.data[i].url)
 
   return image
