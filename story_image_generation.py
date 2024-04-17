@@ -1,7 +1,7 @@
 import requests
 from openai import OpenAI
 
-client = OpenAI(api_key='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')
+client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
 # Downloads an image from the given url.
 def download_image(filename, url):

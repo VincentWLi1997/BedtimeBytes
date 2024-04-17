@@ -8,7 +8,7 @@ from pathlib import Path
 
 speech_file_path = Path(__file__).parent / "newfile.mp3"
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
 def text_to_speech(text,path):
     response = client.audio.speech.create(

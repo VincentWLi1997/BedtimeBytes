@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-client = OpenAI(api_key='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')
+client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
 # Generate a text completion
 def get_completion(prompt, model="gpt-3.5-turbo"):
