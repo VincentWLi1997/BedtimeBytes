@@ -1,42 +1,37 @@
 import streamlit as st
-import requests
-from openai import OpenAI
-from PIL import Image
-from pathlib import Path
-import os
 import story_text_generation as story_text_generation
 import story_image_generation as story_image_generation
 import story_voice_generation as story_voice_generation
+import storyforms
 
 # create our streamlit app
-with st.form(key = "chat"):
-    #Ask user for prompt and press submit button
-    prompt = st.text_input("Tell us what you want a bedtime story about and we'll handle the rest!") # TODO!
-    submitted = st.form_submit_button("Submit")
-    
-    #this is a comment
-    
-    if submitted:
-        #Generate story, title, and prompt for image
-        story=story_text_generation.get_completion(prompt)
-        title_prompt = "The following is a bedtime story for a young child. Generate a title for this story that is exactly 3 words long. Write only this three word title and nothing else. Do not add any punctuation:\n" + story
-        image_prompt= "The following is a bedtime story for a young child. Generate a picture that depicts the story. Do not put any written language in the picture:\n" + story
-        title = story_text_generation.get_completion(title_prompt)
-        
-        #Write out title and story into app
-        st.write(title)
-        st.write(story)
-        
-        #Generate image, 
-        story_image_generation.get_image(title,image_prompt, "dall-e-3")
-        imagefilename = story_image_generation.filename_from_input(title)
-        image = Image.open(str(Path(__file__).parent)+'/'+imagefilename+'_1.png')
-        st.image(image, caption=title)
+st.button("Start Story Time!", type="primary")
 
-        speech_file_path = Path(__file__).parent / "newfile.mp3"
-        
-        story_voice_generation.text_to_speech(story, speech_file_path)
+storyforms.assistedform()
 
-        audio_file = open(speech_file_path, 'rb')
-        audio_bytes = audio_file.read()
-        st.audio(audio_bytes, format='audio/mp3')
+'''
+open=False
+assisted=False
+        
+col1, col2 = st.columns(2)
+with col1:
+    if st.button("Let me submit an open-ended prompt", type="secondary"):
+        st.write("this one")
+with col2:
+    if st.button("Use a menu to decide what's in my story", type="secondary"):
+        st.write("this one")
+        
+if 'clicked' not in st.session_state:
+    st.session_state.clicked = False
+
+def click_button():
+    st.session_state.clicked = True
+
+st.button('Click me', on_click=click_button)
+
+if st.session_state.clicked:
+    # The message and nested widget will remain on the page
+    st.write('Button clicked!')
+    st.slider('Select a value')
+    
+'''
