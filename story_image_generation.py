@@ -34,9 +34,10 @@ def get_image(title, image_prompt, model="dall-e-3"):
       model=model,
       n=n,
       size="1024x1024",
-      quality="hd"
+      quality="standard"
     )
 
+  
   for i in range(n):
       filename = filename_from_input(title) + "_" + str(i+1) + ".png"
       download_image(filename, image.data[i].url)
