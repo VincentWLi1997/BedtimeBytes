@@ -31,17 +31,15 @@ def openform():
             st.image(image, caption=title)
 
             #Generate Text to Speech
-            speech_file_path = Path(__file__).parent / "newfile.mp3"
-            story_voice_generation.text_to_speech(story, speech_file_path)
+            voices_directory = Path(__file__).parent / "voices"
+            audio_to_read = story_voice_generation.text_to_speech(story, voices_directory, title)
 
-            audio_file = open(speech_file_path, 'rb')
-            audio_bytes = audio_file.read()
-            st.audio(audio_bytes, format='audio/mp3')
+            with open(audio_to_read,'rb') as audio_file:
+                audio_bytes = audio_file.read()
+                st.audio(audio_bytes, format='audio/mp3')
+            
        
 class Character:
-    name = ""
-    role = ""
-    ethnicity = ""
     def __init__(self, name, role, ethnicity):
         self.name = name
         self.role = role
@@ -64,9 +62,9 @@ def assistedform():
         
         c = Character(character_name,character_role,character_ethnicity)
         
-        story_language = st.selectbox("What language do you want the story to be in?", options=(
+        story_language = st.selectbox("What language do you want the story to be in?", options=("English", 
         "Afrikaans", "Arabic", "Armenian", "Azerbaijani", "Belarusian", "Bosnian", "Bulgarian", 
-        "Catalan", "Chinese", "Croatian", "Czech", "Danish", "Dutch", "English", "Estonian", 
+        "Catalan", "Chinese", "Croatian", "Czech", "Danish", "Dutch", "Estonian", 
         "Finnish", "French", "Galician", "German", "Greek", "Hebrew", "Hindi", "Hungarian", 
         "Icelandic", "Indonesian", "Italian", "Japanese", "Kannada", "Kazakh", "Korean", 
         "Latvian", "Lithuanian", "Macedonian", "Malay", "Marathi", "Maori", "Nepali", "Norwegian", 
@@ -102,9 +100,9 @@ def assistedform():
             st.image(image, caption=title)
 
             #Generate Text to Speech
-            speech_file_path = Path(__file__).parent / "newfile.mp3"
-            story_voice_generation.text_to_speech(story, speech_file_path)
+            voices_directory = Path(__file__).parent / "voices"
+            story_voice_generation.text_to_speech(story, voices_directory, title="newfile")
 
-            audio_file = open(speech_file_path, 'rb')
+            audio_file = open(voices_directory, 'rb')
             audio_bytes = audio_file.read()
             st.audio(audio_bytes, format='audio/mp3')
