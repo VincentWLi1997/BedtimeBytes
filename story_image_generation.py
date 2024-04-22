@@ -1,7 +1,6 @@
 import requests
 import os
 from openai import OpenAI
-import API_KEY
 
 
 client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
@@ -22,8 +21,8 @@ def filename_from_input(prompt):
     if character.isalnum() or character == " ":
       alphanum += character
   alphanumSplit = alphanum.split()
-  if len(alphanumSplit) > 3:
-    alphanumSplit = alphanumSplit[:3]
+  if len(alphanumSplit) > 4:
+    alphanumSplit = alphanumSplit[:4]
   return "images/" + "_".join(alphanumSplit)
 
 # Create an image

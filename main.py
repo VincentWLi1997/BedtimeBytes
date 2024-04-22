@@ -6,7 +6,7 @@ import storyforms
 
 
 # create our streamlit app
-st.button("Start Story Time!", type="primary")
 
-storyforms.openform()
+storyforms.format_page()
+storyforms.assistedform()
 
