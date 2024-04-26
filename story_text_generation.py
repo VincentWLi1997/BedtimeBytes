@@ -18,3 +18,12 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     
     return completion.choices[0].message.content
 
+def filename_from_input(title):
+  alphanum = ""
+  for character in title:
+    if character.isalnum() or character == " ":
+      alphanum += character
+  alphanumSplit = alphanum.split()
+  if len(alphanumSplit) > 4:
+    alphanumSplit = alphanumSplit[:4]
+  return "_".join(alphanumSplit)

@@ -23,7 +23,7 @@ def filename_from_input(prompt):
   alphanumSplit = alphanum.split()
   if len(alphanumSplit) > 4:
     alphanumSplit = alphanumSplit[:4]
-  return "images/" + "_".join(alphanumSplit)
+  return "_".join(alphanumSplit)
 
 # Create an image
 # If model is not specified, the default is DALL-E-2.
@@ -39,7 +39,23 @@ def get_image(title, image_prompt, model="dall-e-3"):
 
   
   for i in range(n):
-      filename = filename_from_input(title) + "_" + str(i+1) + ".png"
+      filename = "images/" + filename_from_input(title) + ".png"
       download_image(filename, image.data[i].url)
 
   return image
+'''
+if __name__ == "__main__":
+  title = "water boy"
+  image_prompt = "The following is a bedtime story for a young child. Generate a picture that depicts the story. Do not put any written language in the picture:\n"
+  from pathlib import Path
+  from PIL import Image
+  import streamlit as st
+  images_directory = Path(__file__).parent / "images"
+  os.makedirs(images_directory, exist_ok=True) 
+  get_image(title,image_prompt, "dall-e-3")
+  
+  
+  imagefilename = filename_from_input(title)
+  image = Image.open(str(Path(__file__).parent)+'/'+imagefilename+'_1.png')
+  st.image(image)
+'''
