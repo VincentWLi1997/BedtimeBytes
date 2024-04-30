@@ -5,11 +5,11 @@ from pathlib import Path
 
 client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
-def text_to_speech(title, text):
+def text_to_speech(title, text, story_voice="nova"):
     voices_file_path = Path(__file__).parent / "voices/" / f"{title}.mp3"
     response = client.audio.speech.create(
         model="tts-1",
-        voice="nova",
+        voice=story_voice,
         input=text
     )
     with open(voices_file_path, 'wb') as file:
