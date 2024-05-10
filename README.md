@@ -15,7 +15,7 @@ Our app lets users:
 - Customize the story subject and writing style
 - Create story-related images according to their favorite art styles
 - Choose the narration voice or build a voice model of themselves to send to family and friends
-- 
+ 
 ![Tortoise and the Hare as a Renaissance Painting](/thumbnail.png)
 
 ## Our Solution
