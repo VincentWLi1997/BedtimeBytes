@@ -15,9 +15,13 @@ Our app lets users:
 - Customize the story subject and writing style
 - Create story-related images according to their favorite art styles
 - Choose the narration voice or build a voice model of themselves to send to family and friends
+- 
 ![Tortoise and the Hare as a Renaissance Painting](/thumbnail.png)
+
 ## Our Solution
+
 ![Bedtime Bytes Demo Screenshot](/screenshot.png)
+
 We created an app that can create on-demand stories with customized content, characters, and images. There are a variety of languages and cultural storytelling styles available,
 as well as several for-fun styles that would be suited for kids.
 
