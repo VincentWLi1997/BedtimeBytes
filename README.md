@@ -15,10 +15,11 @@ Our app lets users:
 - Customize the story subject and writing style
 - Create story-related images according to their favorite art styles
 - Choose the narration voice or build a voice model of themselves to send to family and friends
-
+(/thumbnail.png)
 ## Our Solution
+(/screenshot.png)
 We created an app that can create on-demand stories with customized content, characters, and images. There are a variety of languages and cultural storytelling styles available,
 as well as several for-fun styles that would be suited for kids.
 
 ## See Our Demo Video
-[![Watch the video](/thumbnail.png)]([https://youtu.be/SaaxIlViHTk](https://youtu.be/Ej1InUZNjcQ?si=lkAb3KXVa0gb46Ar)) 
+[![Watch the video]]([https://youtu.be/SaaxIlViHTk](https://youtu.be/Ej1InUZNjcQ?si=lkAb3KXVa0gb46Ar)) 
