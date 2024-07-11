@@ -5,7 +5,6 @@ import story_text_generation as story_text_generation
 import story_image_generation as story_image_generation
 import story_voice_generation as story_voice_generation
 import os
-import pandas as pd
 from io import StringIO
 
 def filename_from_input(title):
@@ -86,6 +85,8 @@ def generate_story(prompt, image_prompt, story_voice):
         audio_bytes = audio_file.read()
     
     format_story(title,story,image,audio_bytes)
+    
+    
         
     #Write out everything into streamlit
 def format_story(title,story,image,audio_bytes):
@@ -115,7 +116,7 @@ def assistedform():
         story_prompt = ""
         image_prompt = ""
         
-        story_language = st.selectbox("What language do you want the story to be in?", options=("English", 
+        story_language = st.selectbox("Language", options=("English", 
         "Afrikaans", "Arabic", "Armenian", "Azerbaijani", "Belarusian", "Bosnian", "Bulgarian", 
         "Catalan", "Chinese", "Croatian", "Czech", "Danish", "Dutch", "Estonian", 
         "Finnish", "French", "Galician", "German", "Greek", "Hebrew", "Hindi", "Hungarian", 
@@ -129,7 +130,7 @@ def assistedform():
         if story_language:
             story_prompt += "Write a story in " + story_language +". "
         
-        story_style = st.selectbox("What storytelling style would you like to emulate?", options=("", "Dr. Seuss", "Greek Mythology",
+        story_style = st.selectbox("Story Style", options=("", "Dr. Seuss", "Greek Mythology",
         "Norse Sagas", "Japanese Rakugo", "West African Griot", "Native American Oral Traditions", "Indian Epics", "Arabian Nights",
         "Chinese Pingshu", "Aboriginal Dreamtime", "Celtic Storytelling", "Russian Skaz", "Italian Commedia dell'Arte", "Jewish Midrash",
         "Caribbean Anansi Stories", "Mexican Corrido"))
@@ -139,13 +140,13 @@ def assistedform():
         elif story_style:
             story_prompt += "Tell the story in the style of " + story_style + ". "
             
-        story_artstyle = st.selectbox("What art style would you like the picture to be in?", options=("", "Anime", "Cartoon", "Lifelike",
+        story_artstyle = st.selectbox("Art Style", options=("", "Anime", "Cartoon", "Lifelike",
         "Renaissance", "Watercolor"))
         
         if story_artstyle == "":
             image_prompt += "Generate a picture depicting the story below. "
         elif story_artstyle:
-            image_prompt += "Generate a picture in the art style of " + story_artstyle + " that depicts the story below. "
+            image_prompt += "Generate a picture in the art style of " + story_artstyle + " that depicts the story below. Do not put any text in the picture. "
         
         character_name = st.text_input("What is the main character's name?")
         character_role = st.text_input("What is the main character's role?")
@@ -155,9 +156,9 @@ def assistedform():
         if character_name and character_role and character_appearance:  
             image_prompt += ("The main character's name is " 
                 + c.name + ". A description of their appearance is: " + character_appearance +
-                ". Their role in the story is " + c.role)  
+                ". The character's role in the story is " + c.role)  
             story_prompt += ("The main character's name is " 
-                + c.name + ". A description of their appearance is: " + character_appearance +
+                + c.name + ". A description of their appearance is: " + character_appearance + ". Do not let the character's appearance be the focus of the story" +
                 ". Their role in the story is " + c.role)   
         
         story_voice = st.selectbox("Which voice would you like to use?", options =("alloy", "echo", "fable", "onyx", "nova", "shimmer"))
@@ -193,7 +194,7 @@ def submittedstoryform():
             "Vietnamese", "Welsh"
             ))
             
-            story_artstyle = st.selectbox("What art style would you like the picture to be in?", options=("", "Anime", "Cartoon", "Lifelike Art",
+            story_artstyle = st.selectbox("Art Style", options=("", "Anime", "Cartoon", "Lifelike Art",
             "Renaissance Paintings", "Watercolor"))
             
             if story_artstyle == "":

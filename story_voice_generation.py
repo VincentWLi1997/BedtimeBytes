@@ -12,10 +12,20 @@ def text_to_speech(title, text, story_voice="nova"):
         voice=story_voice,
         input=text
     )
-    with open(voices_file_path, 'wb') as file:
+    voicefile = filename_from_input(title)
+    with open(voicefile, 'wb') as file:
       file.write(response.content)
-    return voices_file_path
+    return voicefile
 
+def filename_from_input(title):
+  alphanum = ""
+  for character in title:
+    if character.isalnum() or character == " ":
+      alphanum += character
+  alphanumSplit = alphanum.split()
+  if len(alphanumSplit) > 4:
+    alphanumSplit = alphanumSplit[:4]
+  return "_".join(alphanumSplit)
 
 if __name__ == "__main__":
     voices_file_path = Path(__file__).parent / "voices"

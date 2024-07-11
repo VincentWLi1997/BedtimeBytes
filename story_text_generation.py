@@ -1,5 +1,4 @@
 from openai import OpenAI
-from pathlib import Path
 import os
 
 
