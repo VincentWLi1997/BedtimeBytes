@@ -1,11 +1,11 @@
-import story_text_generation as story_text_generation
-import story_image_generation as story_image_generation
-import story_voice_generation as story_voice_generation
+import OPEN_AI_TEXT as OPEN_AI_TEXT
+import OPEN_AI_IMAGE as OPEN_AI_IMAGE
+import ELEVEN_LABS_VOICE as ELEVEN_LABS_VOICE
 import storyforms
 
 
 # create our streamlit app
 
 storyforms.format_page()
-storyforms.assistedform()
+storyforms.menuform()
 

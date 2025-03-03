@@ -1,9 +1,12 @@
 import requests
 import os
 from openai import OpenAI
+from dotenv import load_dotenv
 
+load_dotenv()
 
-client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+api_key = os.getenv('OPENAI_API_KEY').strip()
+client = OpenAI(api_key=api_key)
 
 # Downloads an image from the given url.
 def download_image(filename, url):
@@ -28,21 +31,29 @@ def filename_from_input(prompt):
 # Create an image
 # If model is not specified, the default is DALL-E-2.
 def get_image(title, image_prompt, model="dall-e-3"):
-  n = 1   # Number of images to generate
-  image = client.images.generate(
-      prompt=image_prompt,
-      model=model,
-      n=n,
-      size="1024x1024",
-      quality="standard"
-    )
+    # Sanitize the image prompt to be more DALL-E friendly
+    safe_prompt = "Create a child-friendly, colorful illustration suitable for a children's book showing: " + image_prompt
+    safe_prompt = safe_prompt.replace("Generate a picture depicting the story below.", "")
+    safe_prompt = safe_prompt.replace("Do not put any written language in the picture.", "")
+    
+    try:
+        n = 1   # Number of images to generate
+        image = client.images.generate(
+            prompt=safe_prompt,
+            model=model,
+            n=n,
+            size="1024x1024",
+            quality="standard"
+        )
+        
+        for i in range(n):
+            filename = "images/" + filename_from_input(title) + ".png"
+            download_image(filename, image.data[i].url)
 
-  
-  for i in range(n):
-      filename = "images/" + filename_from_input(title) + ".png"
-      download_image(filename, image.data[i].url)
-
-  return image
+        return image
+    except Exception as e:
+        print(f"Error generating image: {str(e)}")
+        raise
 '''
 if __name__ == "__main__":
   title = "water boy"
